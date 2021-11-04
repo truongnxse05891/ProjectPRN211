@@ -1,0 +1,10 @@
+﻿@model ProjectPRN211.Models.Account
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var userName = TempData["userName"];
+    var userId = TempData["userId"];
+}
+<h1>Welcome : @userName with ID: @userId</h1>

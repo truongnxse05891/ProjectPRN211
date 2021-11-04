@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProjectPRN211.Models.Account
+
+@{
+    ViewBag.Title = "Login";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
+
+    </script>
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+
+<body>
+    @if (TempData["alertMessage"] != null)
+    {
+        <div id="AlertBox" style="margin:auto"   role="alert">
+            <p style="color:red; text-align:center">@TempData["alertMessage"]</p>
+        </div>
+    }
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Login
+                </div>
+                <div class="card-body">
+
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        </div>
+                        <div class="form-group" style="margin:auto">
+                            <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+                            <a style="float:right" href="@Url.Action("Register","Account")">Create new account</a>
+
+                        </div>
+                        
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>    

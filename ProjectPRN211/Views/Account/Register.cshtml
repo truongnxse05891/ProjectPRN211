@@ -1,0 +1,110 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProjectPRN211.Models.Account
+@section scripts{
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
+
+    </script>
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+    @if (TempData["alertMessage"] != null)
+    {
+        <div id="AlertBox" style="color:red; position: center; text-align:center" role="alert">
+            <p>@TempData["alertMessage"]</p>
+        </div>
+    }
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="container register">
+            <div class="row">
+                <div class="col-md-3 register-left">
+                    <img style="max-width:100%; margin:auto" src="https://img.freepik.com/free-vector/register-now-hanging-sign-white-background_100456-2067.jpg?size=626&ext=jpgg" alt="" />
+
+                </div>
+                <div class="col-md-9 register-right">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name" })
+                                        @Html.ValidationMessageFor(e => e.FullName)
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password" })
+                                        <span id="result"></span>
+                                        @Html.ValidationMessageFor(e => e.Password)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confim Password" })
+                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            @Html.RadioButtonFor(e => e.Gender, true, new { @class = "radio inline" })<span> Male </span>
+                                            <span style="padding-left:14px"></span>
+                                            @Html.RadioButtonFor(e => e.Gender, false, new { @class = "radio inline" })<span>Female </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email" })
+                                        @Html.ValidationMessageFor(e => e.Email)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.Address, new { @class = "form-control", placeholder = "Your Address" })
+                                        @Html.ValidationMessageFor(e => e.Address)
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(e => e.DateOfBirth, new { @type = "date", @class = "form-control" })
+                                        @Html.ValidationMessageFor(e => e.DateOfBirth)
+
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group" style="margin:auto">
+                                    <input type="submit" class="btn btn-primary" value="Register" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+        </div>
+    }
+</body>
+</html>    

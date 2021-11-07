@@ -29,7 +29,7 @@ namespace ProjectPRN211.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("server =(local); database = ProjectDemo;uid=sa;pwd=123456;");
+                optionsBuilder.UseSqlServer("server =(local); database = ProjectDemo;uid=sa;pwd=321Flash!;");
             }
         }
 

@@ -1,4 +1,4 @@
-﻿@model ProjectPRN211.Models.Account
+﻿@model ProjectPRN211.Models.Order
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,12 +16,18 @@
     @foreach (var product in products)
     {
     <li>
-        <form method="post" action="Order">
-            <input readonly style="display: none;" name="productId" value="@product.ProductId" />
+
+        @using (Html.BeginForm("Create", "Order", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ProductId" id="ProductId" value="@product.ProductId" />
+            <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
+            <input type="number" value="1" name="Quality" id="Quality" min="1" max="100" />
+            <button type="submit">Add</button>
+
             <img src="images/@product.Image" />
             <span>@product.ProductName</span>
-            <button type="submit">Add</button>
-        </form>
+        }
     </li>
     }
 </ul>

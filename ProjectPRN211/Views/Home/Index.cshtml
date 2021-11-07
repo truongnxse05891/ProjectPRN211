@@ -6,5 +6,42 @@
 @{
     var userName = TempData["userName"];
     var userId = TempData["userId"];
+    var products = TempData["products"] as List<Product>;
+    var pageCount = (int)TempData["pageCount"];
+    var pageNo = (int)TempData["pageNo"];
 }
 <h1>Welcome : @userName with ID: @userId</h1>
+
+<ul>
+    @foreach (var product in products)
+    {
+    <li>
+        <form method="post" action="Order">
+            <input readonly style="display: none;" name="productId" value="@product.ProductId" />
+            <img src="images/@product.Image" />
+            <span>@product.ProductName</span>
+            <button type="submit">Add</button>
+        </form>
+    </li>
+    }
+</ul>
+
+<hr />
+
+<ul>
+    @for (var i = 0; i < pageCount; i++)
+    {
+        <li>
+            @if (i == pageNo)
+            {
+                <span>@(i + 1)</span>
+            }
+            else
+            {
+                <a href="/?pageNo=@i">
+                    @(i + 1)
+                </a>
+            }
+        </li>
+    }
+</ul>

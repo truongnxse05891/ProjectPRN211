@@ -1,5 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ProjectPRN211.Models.Order
+
 @{
+    ViewBag.Title = "OrderDetail";
 }
+
+@{
+
+    var orderDetails = TempData["orderDetails"] as List<OrderDetail>;
+    var userId = TempData["userId"];
+}
+
+<ul>
+    @foreach (var orderDetail in orderDetails)
+    {
+    <li>
+
+        <span>@orderDetail.RecipientName</span>
+        <span>@orderDetail.RecipientAddress</span>
+        <span>@orderDetail.OrderDate</span>
+    </li>
+    }
+</ul>

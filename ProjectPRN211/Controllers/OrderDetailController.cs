@@ -19,7 +19,9 @@ namespace ProjectPRN211.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+            var orderDetail = context.OrderDetails.ToList();
 
+            TempData["orderDetails"] = orderDetail;
             TempData["userId"] = userId;
 
             return View();

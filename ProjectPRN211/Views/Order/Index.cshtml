@@ -1,0 +1,39 @@
+﻿@model ProjectPRN211.Models.Order
+
+@{
+    ViewBag.Title = "Order";
+}
+
+@{
+
+    var orders = TempData["orders"] as List<Order>;
+    var userId = TempData["userId"];
+}
+
+<a href="/OrderDetail">Cart history</a>
+
+<ul>
+    @foreach (var order in orders)
+    {
+        <li>
+            @using (Html.BeginForm("Edit", "Order", FormMethod.Post))
+            {
+                <span>@order.OrderProduct.ProductName</span>
+                <img src="~/images/@order.OrderProduct.Image" />
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ProductId" id="ProductId" value="@order.ProductId" />
+                <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
+                <input type="number" value="@order.Quality" name="Quality" id="Quality" min="1" max="100" />
+                <button type="submit">Edit</button>
+            }
+
+            @using (Html.BeginForm("Delete", "Order", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ProductId" id="ProductId" value="@order.ProductId" />
+                <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
+                <button type="submit">Delete</button>
+            }
+        </li>
+    }
+</ul>

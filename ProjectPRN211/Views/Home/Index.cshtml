@@ -1,4 +1,4 @@
-﻿@model ProjectPRN211.Models.Account
+﻿@model ProjectPRN211.Models.Order
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,5 +6,48 @@
 @{
     var userName = TempData["userName"];
     var userId = TempData["userId"];
+    var products = TempData["products"] as List<Product>;
+    var pageCount = (int)TempData["pageCount"];
+    var pageNo = (int)TempData["pageNo"];
 }
 <h1>Welcome : @userName with ID: @userId</h1>
+
+<ul>
+    @foreach (var product in products)
+    {
+    <li>
+
+        @using (Html.BeginForm("Create", "Order", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ProductId" id="ProductId" value="@product.ProductId" />
+            <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
+            <input type="number" value="1" name="Quality" id="Quality" min="1" max="100" />
+            <button type="submit">Add</button>
+
+            <img src="images/@product.Image" />
+            <span>@product.ProductName</span>
+        }
+    </li>
+    }
+</ul>
+
+<hr />
+
+<ul>
+    @for (var i = 0; i < pageCount; i++)
+    {
+        <li>
+            @if (i == pageNo)
+            {
+                <span>@(i + 1)</span>
+            }
+            else
+            {
+                <a href="/?pageNo=@i">
+                    @(i + 1)
+                </a>
+            }
+        </li>
+    }
+</ul>

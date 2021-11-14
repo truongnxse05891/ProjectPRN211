@@ -34,7 +34,15 @@ namespace ProjectPRN211.Controllers
                     orders.Add(v.order);
                 });
 
+            double totalPrice = 0;
+
+            for(int i = 0; i < orders.Count; i++)
+            {
+                totalPrice += orders[i].Quality * orders[i].OrderProduct.Price;
+            }
+
             TempData["orders"] = orders;
+            TempData["totalPrice"] = totalPrice;
             TempData["userId"] = userId;
 
             return View();

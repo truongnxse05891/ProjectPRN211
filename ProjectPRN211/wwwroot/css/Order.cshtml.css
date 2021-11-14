@@ -1,0 +1,59 @@
+﻿body {
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    ul li {
+        display: flex;
+        justify-content: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+    }
+
+        ul li form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        ul li form .product-name {
+            flex-grow: 1;
+        }
+
+        ul li form > * {
+            margin: 0 0.4rem;
+        }
+
+            ul li form:first-child {
+                flex-grow: 1;
+            }
+
+.product-img {
+    vertical-align: middle;
+    width: 5rem;
+    height: 5rem;
+}
+
+.product-name {
+    margin-left: 10px;
+    font-size: 2rem;
+}
+
+#Quality {
+    max-width: 120px;
+}
+
+#addOrderDetail {
+    text-align: right;
+}
+
+.total-price {
+    text-align: right;
+    margin: 1rem;
+    color: red;
+}

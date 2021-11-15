@@ -10,44 +10,50 @@
     var pageCount = (int)TempData["pageCount"];
     var pageNo = (int)TempData["pageNo"];
 }
-<h1>Welcome : @userName with ID: @userId</h1>
+
+<head>
+    <link rel="stylesheet" href="~/css/Home.cshtml.css" />
+</head>
 
 <ul>
     @foreach (var product in products)
     {
-    <li>
+        <li>
 
-        @using (Html.BeginForm("Create", "Order", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <input type="hidden" name="ProductId" id="ProductId" value="@product.ProductId" />
-            <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
-            <input type="number" value="1" name="Quality" id="Quality" min="1" max="100" />
-            <button type="submit">Add</button>
-
-            <img src="images/@product.Image" />
-            <span>@product.ProductName</span>
-        }
-    </li>
+            @using (Html.BeginForm("Create", "Order", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <img class="product-img img-thumbnail" src="images/@product.Image" />
+                <span class="product-name">@product.ProductName</span>
+                <input type="hidden" name="ProductId" id="ProductId" value="@product.ProductId" />
+                <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
+                <input type="number" value="1" name="Quality" id="Quality" min="1" max="100" class="form-control" />
+                <button type="submit" class="btn btn-primary">Add</button>
+            }
+        </li>
     }
 </ul>
 
 <hr />
 
-<ul>
-    @for (var i = 0; i < pageCount; i++)
-    {
-        <li>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (var i = 0; i < pageCount; i++)
+        {
             @if (i == pageNo)
             {
-                <span>@(i + 1)</span>
+                <li class="page-item active">
+                    <a class="page-link" href="#">@(i + 1)</a>
+                </li>
             }
             else
             {
-                <a href="/?pageNo=@i">
-                    @(i + 1)
-                </a>
+                <li class="page-item">
+                    <a href="/?pageNo=@i" class="page-link">
+                        @(i + 1)
+                    </a>
+                </li>
             }
-        </li>
-    }
-</ul>
+        }
+    </ul>
+</nav>

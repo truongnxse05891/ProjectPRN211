@@ -1,0 +1,31 @@
+﻿.product-img {
+    vertical-align: middle;
+    width: 5rem;
+    height: 5rem;
+}
+.page-no {
+    display: flex;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+ul li form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li form > * {
+    margin: 0.4rem;
+}
+
+    ul li .product-name {
+        flex-grow: 1;
+    }
+
+#Quality {
+    max-width: 120px;
+}

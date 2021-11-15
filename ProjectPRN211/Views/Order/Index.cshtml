@@ -8,7 +8,12 @@
 
     var orders = TempData["orders"] as List<Order>;
     var userId = TempData["userId"];
+    var totalPrice = TempData["totalPrice"];
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/Order.cshtml.css" />
+</head>
 
 <a href="/OrderDetail">Cart history</a>
 
@@ -16,24 +21,44 @@
     @foreach (var order in orders)
     {
         <li>
-            @using (Html.BeginForm("Edit", "Order", FormMethod.Post))
+            @using (Html.BeginForm("Edit", "Order", FormMethod.Post, new { @class = "edit-form" }))
             {
-                <span>@order.OrderProduct.ProductName</span>
-                <img src="~/images/@order.OrderProduct.Image" />
+                <img src="~/images/@order.OrderProduct.Image" class="product-img img-thumbnail" />
+                <div class="product-name">
+                    <div style="color:red">@order.OrderProduct.ProductName</div>
+                    <div>@(order.OrderProduct.Price).000đ</div>
+                </div>
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="ProductId" id="ProductId" value="@order.ProductId" />
                 <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
-                <input type="number" value="@order.Quality" name="Quality" id="Quality" min="1" max="100" />
-                <button type="submit">Edit</button>
+                <input type="number" class="form-control" value="@order.Quality" name="Quality" id="Quality" min="1" max="100" />
+                <button type="submit" class="btn btn-primary">Edit</button>
             }
 
-            @using (Html.BeginForm("Delete", "Order", FormMethod.Post))
+            @using (Html.BeginForm("Delete", "Order", FormMethod.Post, new { @class = "delete-form" }))
             {
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="ProductId" id="ProductId" value="@order.ProductId" />
                 <input type="hidden" name="AccountId" id="AccountId" value="@userId" />
-                <button type="submit">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
             }
         </li>
     }
 </ul>
+@if (orders.Count != 0)
+{
+    <div class="total-price">Total: @(totalPrice.ToString()).000đ</div>
+    @using (Html.BeginForm("GetDetail", "OrderDetail", FormMethod.Post, new { name = "addOrderDetail", id = "addOrderDetail" }))
+    {
+        @Html.AntiForgeryToken()
+        @foreach (var order in orders)
+        {
+            <input type="hidden" name="orderIds[]" value="@order.OrderId" />
+
+        }
+
+        <button type="submit" id="submit-button" class="btn btn-outline-success" onclick="return confirm('Are you sure?')">Confirm cart</button>
+    }
+}
+
+

@@ -1,6 +1,7 @@
 ﻿@{
     var userName = TempData["userName"];
 }
+@{ var userID = TempData["userId"]; }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,24 +26,24 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
                         </li>
 
-                        @{
-                            if (TempData["userName"] != null)
+                        @{ if (TempData["userId"] != null)
                             {
                                 <li class="navbar-nav ml-auto">
-                                    <a class="nav-link text-dark">@userName</a>
+                                    <strong class="nav-link text-dark">@userName</strong>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                                 </li>
-                            }
+ }
                             else
                             {
                                 <li class="navbar-nav ml-auto">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                                 </li>
-                            }
-                        }
+ } }
 
 
                     </ul>
@@ -58,7 +59,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - ProjectPRN211 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - FoodStore - <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
